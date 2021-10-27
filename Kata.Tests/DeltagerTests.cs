@@ -32,7 +32,20 @@ namespace Kata.Tests
 
             // Assert
             Assert.Throws<ArgumentException>(() => sut.City = positiveResult);
-            
+        }
+        //::::::::::::::::::::::::::::
+        [Fact]
+        public void ParticipantsNameMustBeNull()
+        {
+            // Arrange
+            var sut = new Participant();
+            var positiveResult = "Michael";
+
+            // Act
+            sut.Name = positiveResult;
+
+            // Assert
+            sut.Name.Should().Be(positiveResult);
         }
 
         [Fact]
@@ -52,6 +65,20 @@ namespace Kata.Tests
 
         }
 
+        //::::::::::::::::::::::::::::
+        [Fact]
+        public void ParticipantsNameMustBeNullEmpty()
+        {
+            // Arrange
+            var sut = new Participant();
+            var positiveResult = "Michael";
+
+            // Act
+            sut.Name = positiveResult;
+
+            // Assert
+            sut.Name.Should().Be(positiveResult);
+        }
 
         [Fact]
         public void ParticipantsNameMustNotBeNullEmpty()
@@ -59,14 +86,42 @@ namespace Kata.Tests
             // Arrange
             var sut = new Participant();
 
-
             var emptyName = "";
            
             // Act
 
             // Assert
             Assert.Throws<ArgumentException>(() => sut.Name = emptyName);
-          
+        }
+
+        //::::::::::::::::::::::::::::
+
+        [Fact]
+        public void ParticipantsNameValid()
+        {
+            // Arrange
+            var sut = new Participant();
+            var positiveResult = "Michael";
+
+            // Act
+            sut.Name = positiveResult;
+
+            // Assert
+            sut.Name.Should().Be(positiveResult);
+        }
+
+        [Fact]
+        public void ParticipantsNameSymbols()
+        {
+            // Arrange
+            var sut = new Participant();
+            var positiveResult = "#¤%";
+
+            // Act
+            // sut.City = positiveResult;
+
+            // Assert
+            Assert.Throws<ArgumentException>(() => sut.Name = positiveResult);
 
         }
     }
