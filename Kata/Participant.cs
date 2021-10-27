@@ -61,8 +61,17 @@ namespace Kata
         public string Name
         {
             get { return name; }
-            set { name = value; }
+            set 
+            {
+                ValidateName(value);
+                name = value; 
+            }
         }
 
+        private void ValidateName(string name)
+        {
+            if (String.IsNullOrEmpty(name))
+            throw new ArgumentException();
+        }
     }
 }
