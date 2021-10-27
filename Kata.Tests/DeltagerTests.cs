@@ -110,12 +110,14 @@ namespace Kata.Tests
             sut.Name.Should().Be(positiveResult);
         }
 
-        [Fact]
-        public void ParticipantsNameSymbols()
+        [Theory]
+        [InlineData("#¤%")]
+        [InlineData("9")]
+        public void ParticipantsNameNonValidWithSymbols(string testData)
         {
             // Arrange
             var sut = new Participant();
-            var positiveResult = "#¤%";
+            var positiveResult = testData;
 
             // Act
             // sut.City = positiveResult;
@@ -124,5 +126,6 @@ namespace Kata.Tests
             Assert.Throws<ArgumentException>(() => sut.Name = positiveResult);
 
         }
+
     }
 }

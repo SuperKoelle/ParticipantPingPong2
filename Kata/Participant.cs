@@ -72,6 +72,16 @@ namespace Kata
         {
             if (String.IsNullOrEmpty(name))
             throw new ArgumentException();
+
+            var validatCharArray = "abcdefghijklmnopqrstuvwxyzæøå".ToCharArray();
+
+            var test = name.IndexOfAny(validatCharArray);
+
+
+            if (name.IndexOfAny(validatCharArray) == -1)
+            {
+                throw new ArgumentException();
+            }
         }
     }
 }
