@@ -7,6 +7,7 @@ namespace Kata.Tests
     public class ParticipantsTests
     {
         [Fact]
+        [Trait ("Catagory", "City")]
         public void ParticipantsCityValid()
         {
             // Arrange
@@ -21,6 +22,7 @@ namespace Kata.Tests
         }
 
         [Fact]
+        [Trait("Catagory", "City")]
         public void ParticipantsCitySymbols()
         {
             // Arrange
@@ -35,6 +37,7 @@ namespace Kata.Tests
         }
         //::::::::::::::::::::::::::::
         [Fact]
+        [Trait("Catagory", "Name")]
         public void ParticipantsNameMustBeNull()
         {
             // Arrange
@@ -49,6 +52,7 @@ namespace Kata.Tests
         }
 
         [Fact]
+        [Trait("Catagory", "Name")]
         public void ParticipantsNameMustNotBeNull()
         {
             // Arrange
@@ -67,6 +71,7 @@ namespace Kata.Tests
 
         //::::::::::::::::::::::::::::
         [Fact]
+        [Trait("Catagory", "Name")]
         public void ParticipantsNameMustBeNullEmpty()
         {
             // Arrange
@@ -81,6 +86,7 @@ namespace Kata.Tests
         }
 
         [Fact]
+        [Trait("Catagory", "Name")]
         public void ParticipantsNameMustNotBeNullEmpty()
         {
             // Arrange
@@ -96,12 +102,16 @@ namespace Kata.Tests
 
         //::::::::::::::::::::::::::::
 
-        [Fact]
-        public void ParticipantsNameValid()
+        [Theory]
+        [InlineData("Marie")]
+        [InlineData("Anne Marie")]
+        [InlineData("Anne-Marie")]
+        [Trait("Catagory", "Name")]
+        public void ParticipantsNameValid(string name)
         {
             // Arrange
             var sut = new Participant();
-            var positiveResult = "Michael";
+            var positiveResult = name;
 
             // Act
             sut.Name = positiveResult;
@@ -113,6 +123,7 @@ namespace Kata.Tests
         [Theory]
         [InlineData("#¤%")]
         [InlineData("9")]
+        [Trait("Catagory", "Name")]
         public void ParticipantsNameNonValidWithSymbols(string testData)
         {
             // Arrange
@@ -126,6 +137,28 @@ namespace Kata.Tests
             Assert.Throws<ArgumentException>(() => sut.Name = positiveResult);
 
         }
+
+        [Theory]
+        [InlineData("john","John")]
+        [InlineData("joHn","John")]
+        [InlineData("JOHN", "John")]
+        [InlineData("joHn-kølle", "John-Kølle")]
+        [InlineData("joHn kølle", "John Kølle")]
+        [InlineData("joHn kØlle", "John Kølle")]
+        [Trait("Catagory", "Name")]
+        public void ParticipantsNameGetCapitalFirstLetterAndTheRestSmallRegardlessOfFormatting(string name, string expected)
+        {
+            // Arrange
+            var sut = new Participant();
+
+            sut.Name = name;
+
+            
+            // Assert
+            sut.Name.Should().Be(expected);
+        }
+
+        
 
     }
 }
