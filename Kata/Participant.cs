@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Kata
 {
@@ -64,8 +65,49 @@ namespace Kata
             set 
             {
                 ValidateName(value);
-                name = value; 
+
+                name = HandleFormatting(value);
             }
+        }
+
+        private string HandleFormatting(string value)
+        {
+            var formattedName = "";
+            var containsWhitespace = value.Contains(' ');
+            var containsDash = value.Contains('-');
+            if (!containsWhitespace && !containsDash)
+            {
+                formattedName += value[0].ToString().ToUpper();
+                formattedName += value.Substring(1).ToLower();
+                return formattedName;
+            }
+            else
+            {
+                bool isFirstLetterOfWord = true;
+                for(int i = 0; i < value.Length; i++)
+                {
+                    var currentChar = value[i];
+                    if (currentChar != ' ' && currentChar != '-')
+                    {
+                        if(isFirstLetterOfWord)
+                        {
+                            formattedName += currentChar.ToString().ToUpper();
+                            isFirstLetterOfWord = false;
+                        }
+                        else
+                        {
+                            formattedName += currentChar.ToString().ToLower();
+                        }
+                    }
+                    else
+                    {
+                        formattedName += currentChar;
+                        isFirstLetterOfWord = true;
+                    }
+                }
+            }
+            
+            return formattedName;
         }
 
         private void ValidateName(string name)
@@ -73,12 +115,10 @@ namespace Kata
             if (String.IsNullOrEmpty(name))
             throw new ArgumentException();
 
-            var validatCharArray = "abcdefghijklmnopqrstuvwxyzæøå".ToCharArray();
-
-            var test = name.IndexOfAny(validatCharArray);
+            var validatCharArray = "abcdefghijklmnopqrstuvwxyzæøå- ".ToCharArray();
 
 
-            if (name.IndexOfAny(validatCharArray) == -1)
+            if (name.ToLower().IndexOfAny(validatCharArray) == -1)
             {
                 throw new ArgumentException();
             }

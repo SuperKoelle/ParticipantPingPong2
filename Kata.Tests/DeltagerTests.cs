@@ -152,13 +152,9 @@ namespace Kata.Tests
             var sut = new Participant();
 
             sut.Name = name;
-
             
             // Assert
             sut.Name.Should().Be(expected);
         }
-
-        
-
     }
 }
