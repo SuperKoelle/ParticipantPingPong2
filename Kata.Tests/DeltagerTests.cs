@@ -145,6 +145,7 @@ namespace Kata.Tests
         [InlineData("joHn-kølle", "John-Kølle")]
         [InlineData("joHn kølle", "John Kølle")]
         [InlineData("joHn kØlle", "John Kølle")]
+        [InlineData("joHn-kØlle Chernyayev List", "John-Kølle Chernyayev List")]
         [Trait("Catagory", "Name")]
         public void ParticipantsNameGetCapitalFirstLetterAndTheRestSmallRegardlessOfFormatting(string name, string expected)
         {
