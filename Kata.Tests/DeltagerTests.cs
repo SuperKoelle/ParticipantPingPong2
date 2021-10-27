@@ -34,5 +34,40 @@ namespace Kata.Tests
             Assert.Throws<ArgumentException>(() => sut.City = positiveResult);
             
         }
+
+        [Fact]
+        public void ParticipantsNameMustNotBeNull()
+        {
+            // Arrange
+            var sut = new Participant();
+
+           
+           
+            string nullName = null;
+            // Act
+             
+            // Assert
+          
+            Assert.Throws<ArgumentException>(() => sut.Name = nullName);
+
+        }
+
+
+        [Fact]
+        public void ParticipantsNameMustNotBeNullEmpty()
+        {
+            // Arrange
+            var sut = new Participant();
+
+
+            var emptyName = "";
+           
+            // Act
+
+            // Assert
+            Assert.Throws<ArgumentException>(() => sut.Name = emptyName);
+          
+
+        }
     }
 }
