@@ -1,4 +1,6 @@
-﻿namespace Kata
+﻿using System;
+
+namespace Kata
 {
     public class Participant
     {
@@ -26,7 +28,19 @@
         public string City
         {
             get { return city; }
-            set { city = value; }
+            set
+            {
+                var validatCharArray = "abcdefghijklmnopqrstuvwxyzæøå1234567890".ToCharArray();
+
+                var test = value.IndexOfAny(validatCharArray);
+
+
+                if (value.IndexOfAny(validatCharArray) == -1)
+                {
+                    throw new ArgumentException();
+                }
+                city = value;
+            }
         }
 
 

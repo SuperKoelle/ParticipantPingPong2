@@ -17,7 +17,7 @@ namespace Kata.Tests
             sut.City = positiveResult;
 
             // Assert
-            Assert.Throws<ArgumentException>(() => sut.City = positiveResult);
+            sut.City.Should().Be(positiveResult);
         }
 
         [Fact]
@@ -28,10 +28,11 @@ namespace Kata.Tests
             var positiveResult = "#¤%";
 
             // Act
-            sut.City = positiveResult;
+           // sut.City = positiveResult;
 
             // Assert
-            sut.City.Should().Be(positiveResult);
+            Assert.Throws<ArgumentException>(() => sut.City = positiveResult);
+            
         }
     }
 }
